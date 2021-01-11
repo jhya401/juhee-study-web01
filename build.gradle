@@ -37,6 +37,10 @@ repositories {
 // 주의 : 버전명시를 안해야 상단에서 명시한 버전을 따라갈 수 있음.
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.projectlombok:lombok')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('com.h2database:h2')    // 테스트용 인메모리 관계형 데이터베이스.
+    compile('org.springframework.boot:spring-boot-starter-mustache')
     testCompile('org.springframework.boot:spring-boot-starter-test')
     //testCompile group: 'junit', name: 'junit', version: '4.12'
 }
