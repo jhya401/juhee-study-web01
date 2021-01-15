@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
  * @SpringBootApplication을 선언함으로서 여기부터 설정을 읽고, 스프링부트, 빈 참조생성 설정 등 자동으로 됨.
  */
 
-@EnableJpaAuditing  //JPA Auditing 활성화
+//@EnableJpaAuditing  //JPA Auditing 활성화  => 삭제.
 @SpringBootApplication
 public class Application {
     public static void main(String[] args) {

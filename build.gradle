@@ -41,6 +41,9 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('com.h2database:h2')    // 테스트용 인메모리 관계형 데이터베이스.
     compile('org.springframework.boot:spring-boot-starter-mustache')
+    compile('org.springframework.boot:spring-boot-starter-oauth2-client')   // 소셜 기능 구현시 필요한 의존성
+    compile('org.springframework.session:spring-session-jdbc')              // DB세션사용 관련
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.springframework.security:spring-security-test')        // security 적용 후 인증된 사용자 필요한 테스트 관련
     //testCompile group: 'junit', name: 'junit', version: '4.12'
 }
