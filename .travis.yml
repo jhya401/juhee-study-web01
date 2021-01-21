@@ -18,7 +18,7 @@ cache:
 script: "./gradlew clean build"
 
 # CI완료 후 자동으로 알람이 가도록 설정
-notification:
+notifications:
   email:
     recipients:
       - 'juheeya401@gmail.com'
