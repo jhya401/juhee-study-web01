@@ -18,9 +18,9 @@ cache:
 script: "./gradlew clean build"
 
 before_deploy:
-  - zip -r juhee-study-web01 *
+  - zip -r study-web01 *
   - mkdir -p deploy
-  - mv juhee-study-web01.zip deploy/juhee-study-web01.zip
+  - mv study-web01.zip deploy/study-web01.zip
 
 deploy:
   - provider: s3
@@ -31,6 +31,17 @@ deploy:
     skip_cleanup: true
     acl: private # zip 파일 접근을 private로 함
     local_dir: deploy # before_deploy에서 생성한 디렉토리
+    wait-until-deployed: true
+
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: web01-build # S3 버킷
+    key: study-web01.zip # 빌드 파일을 압축해서 전달
+    bundle_type: zip
+    application: study-web01 # 웹콘솔에서 등록한 CodeDeploy 애플리케이션
+    deployment_group: study-web01-group # 웹 콘솔에서 등록한 CodeDepoy 배포 그룹
+    region: ap-northeast-2
     wait-until-deployed: true
 
 # CI완료 후 자동으로 알람이 가도록 설정
