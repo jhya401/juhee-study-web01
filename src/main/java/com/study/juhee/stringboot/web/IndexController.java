@@ -50,4 +50,10 @@ public class IndexController {
 
         return "posts-update";
     }
+
+    // 책 찾기 화면으로 전환
+    @GetMapping("/book/search")
+    public String bookSearch() {
+        return "book-search";
+    }
 }
