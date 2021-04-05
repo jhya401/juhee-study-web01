@@ -17,19 +17,14 @@ public class PostsApiController {
     // save
     @PostMapping("/api/v1/posts")
     public Long save(@RequestBody PostsSaveRequestDto requestDto) {
-        return postsService.save(requestDto);
+        Long id = postsService.save(requestDto);
+        return id;
     }
 
     // select one
     @GetMapping("/api/v1/posts/{id}")
     public PostsResponseDto findById (@PathVariable Long id) {
         return postsService.findById(id);
-    }
-
-    @GetMapping("/api/v1/posts/list")
-    public String findAllPosts(Model model) {
-        model.addAttribute("posts", postsService.findAllDesc());
-        return "posts-list";
     }
 
     // update

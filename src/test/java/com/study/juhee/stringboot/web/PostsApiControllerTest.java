@@ -61,8 +61,23 @@ public class PostsApiControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "USER")
+    public void Posts_모든목록을조회한다() throws Exception {
+        //given
+        PostsSaveRequestDto requestDto01 = PostsSaveRequestDto.builder().title("title01").content("content01").author("author01").build();
+        PostsSaveRequestDto requestDto02 = PostsSaveRequestDto.builder().title("title02").content("content02").author("author02").build();
+        String url = "http://localhost:" + port + "/api/v1/posts/list";
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.writeValueAsString(requestDto01);
+        objectMapper.writeValueAsString(requestDto02);
+
+
+    }
+
+    @Test
     @WithMockUser(roles = "USER")       // 인증된 가짜 사용자를 만들어서 사용 /roles에 권한을 추가할 수 있다. > 즉, 이렇게 쓰면 ROLE_USER권한을 가진 사용자가 API를 요청하는 것과 동일함.
-    public void Posts_등록된다() throws  Exception {
+    public void Posts_등록된다() throws Exception {
         //given
         String title = "title";
         String content = "content";

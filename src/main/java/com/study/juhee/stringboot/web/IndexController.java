@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 public class IndexController {
 
     private final PostsService postsService;
-    private final HttpSession httpSession;
+    //private final HttpSession httpSession;
 
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser sessionUser) {
@@ -35,6 +35,12 @@ public class IndexController {
     @GetMapping("/posts/save")
     public String postsSave() {
         return "posts-save";
+    }
+
+    @GetMapping("/posts/list")
+    public String findAllPosts(Model model) {
+        model.addAttribute("posts", postsService.findAllDesc());
+        return "posts-list";
     }
 
     //수정 화면으로 전환

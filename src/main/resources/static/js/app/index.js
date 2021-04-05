@@ -27,7 +27,7 @@ var index = {
             data: JSON.stringify(data)
         }).done(function() {
             alert('글이 등록되었습니다.');
-            window.location.href = '/';     // 글 등록 후 메인페이지(/)로 이동
+            window.location.href = '/posts/list';     // 글 등록 후 호출 할 화면
         }).fail(function(error) {
             alert(JSON.stringify(error));
         });
@@ -48,7 +48,7 @@ var index = {
             data: JSON.stringify(data)
         }).done(function() {
             alert('글이 수정되었습니다.');
-            window.location.href = '/';
+            window.location.href = '/posts/list';
         }).fail(function(error) {
             alert(JSON.stringify(error));
         });
