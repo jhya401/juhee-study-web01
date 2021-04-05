@@ -5,7 +5,6 @@ import com.study.juhee.stringboot.web.dto.PostsResponseDto;
 import com.study.juhee.stringboot.web.dto.PostsSaveRequestDto;
 import com.study.juhee.stringboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor        // 생성자를 자동으로 마들어주는 롬복 어노테이션!(final로 지정된 필드 필수입력 생성자를 생성해 준다)
@@ -17,8 +16,7 @@ public class PostsApiController {
     // save
     @PostMapping("/api/v1/posts")
     public Long save(@RequestBody PostsSaveRequestDto requestDto) {
-        Long id = postsService.save(requestDto);
-        return id;
+        return postsService.save(requestDto);
     }
 
     // select one
