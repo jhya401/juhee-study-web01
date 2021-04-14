@@ -4,7 +4,7 @@ name: juhee-study-web01
 on:
   push:
     branches:
-      - version/master  # 트리거 브랜치 지정. master로 지정했기 때문에 master에 푸쉬되면 빌드가 시작됨.
+      - master  # 트리거 브랜치 지정. master로 지정했기 때문에 master에 푸쉬되면 빌드가 시작됨.
     workflow_dispatch:  # 브랜치 push 이벤트 외, 수동으로 실행하도록 설정할 수 있음
 
 jobs:
