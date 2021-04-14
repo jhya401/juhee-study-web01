@@ -7,6 +7,7 @@ import com.study.juhee.stringboot.web.dto.PostsSaveRequestDto;
 import com.study.juhee.stringboot.web.dto.PostsUpdateRequestDto;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -60,6 +60,7 @@ public class PostsApiControllerTest {
         postsRepository.deleteAll();
     }
 
+    @Ignore
     @Test
     @WithMockUser(roles = "USER")
     public void Posts_모든목록을조회한다() throws Exception {
@@ -72,7 +73,10 @@ public class PostsApiControllerTest {
         objectMapper.writeValueAsString(requestDto01);
         objectMapper.writeValueAsString(requestDto02);
 
+        mvc.perform(get(url)).andExpect(status().isOk());
 
+        List<Posts> all = postsRepository.findAll();
+        assertThat(all.size()).isEqualTo(2);
     }
 
     @Test
@@ -129,9 +133,8 @@ public class PostsApiControllerTest {
 
         String url = "http://localhost:" + port + "/api/v1/posts/" + updateId;
 
-        HttpEntity<PostsUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
-
         ////when1 :: @SpringBootTest를 사용해서 테스트한다.
+        //HttpEntity<PostsUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
         //ResponseEntity<Long> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity, Long.class);
 
         ////then

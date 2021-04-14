@@ -2,6 +2,7 @@ package com.study.juhee.stringboot.config.auth;
 
 import com.study.juhee.stringboot.config.auth.dto.OAuthAttributes;
 import com.study.juhee.stringboot.config.auth.dto.SessionUser;
+import com.study.juhee.stringboot.domain.user.Role;
 import com.study.juhee.stringboot.domain.user.User;
 import com.study.juhee.stringboot.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -41,7 +42,8 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         // OAuthAttributes : OAuth2UserService를 통해서 가져온 OAuth2User의 attribute를 담을 클래스.
         OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
 
-        User user = saveOrUpdate(attributes);
+        User user01 = saveOrUpdate(attributes);
+        User user = updateRole(user01); //TODO:(임시)인증 성공시 'USER' ROLE 부여 -> 추후 권한관리 필요하면 로직 수정
         httpSession.setAttribute("user", new SessionUser(user));    // SessionUser : 세션 사용자 정보를 저장하기위한 Dto클래스.
 
         return new DefaultOAuth2User(
@@ -56,5 +58,10 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                 .orElse(attributes.toEntity());     // 조회결과가 null이면 새로 등록함.
 
         return userRepository.save(user);
+    }
+
+    private User updateRole(User user) {
+        if (user.getRole().equals(Role.USER)) return user;
+        return user.update(Role.USER);
     }
 }

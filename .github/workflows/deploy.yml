@@ -1,0 +1,29 @@
+#Github Action yml 파일
+name: juhee-study-web01
+
+on:
+  push:
+    branches:
+      - version/master  # 트리거 브랜치 지정. master로 지정했기 때문에 master에 푸쉬되면 빌드가 시작됨.
+    workflow_dispatch:  # 브랜치 push 이벤트 외, 수동으로 실행하도록 설정할 수 있음
+
+jobs:
+  build:
+    runs-on: ubuntu-latest   # 해당 Github Action 스크립트가 작동될 OS환경 지정 - Centos가 공식지원하지 않아 Ubuntu 사용한다고 함(202104)
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2  # 프로젝트코드를 checkout한다
+
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1  # Github Action이 실행될 OS에 JAVA를 설치한다
+        with:
+          java-version: 1.8
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew  # gradle wrapper 실행 권한 부여(+x) - 이 권한을 줘야 다음 스크립트를 진행할 수 있음
+        shell: bash
+
+      - name: Build with Gradle
+        run: ./gradlew clean build  # gradle wrapper를 통해 해당 프로젝트를 build 한다
+        shell: bash
