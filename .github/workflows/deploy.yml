@@ -52,7 +52,7 @@ jobs:
           cd deploy && zip -r deploy.zip .
 
       # Beanstalk 플러그인 사용하기
-      # 현재시간을 이용해서 Beanstalk가 배포할 때마다 유니크한 버저닝이 될 수 있도록
+      # 현재시간을 이용해서 Beanstalk가 배포할 때마다 유니크한 버저닝이 될 수 있도록.
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v14
         with:
