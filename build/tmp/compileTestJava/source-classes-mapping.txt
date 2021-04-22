@@ -1,0 +1,10 @@
+com/study/juhee/stringboot/web/IndexControllerTest.java
+ com.study.juhee.stringboot.web.IndexControllerTest
+com/study/juhee/stringboot/web/PostsApiControllerTest.java
+ com.study.juhee.stringboot.web.PostsApiControllerTest
+com/study/juhee/stringboot/domain/posts/PostsRepositoryTest.java
+ com.study.juhee.stringboot.domain.posts.PostsRepositoryTest
+com/study/juhee/stringboot/web/dto/HelloResponseDtoTest.java
+ com.study.juhee.stringboot.web.dto.HelloResponseDtoTest
+com/study/juhee/stringboot/web/HelloControllerTest.java
+ com.study.juhee.stringboot.web.HelloControllerTest

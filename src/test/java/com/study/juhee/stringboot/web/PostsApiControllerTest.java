@@ -5,18 +5,17 @@ import com.study.juhee.stringboot.domain.posts.Posts;
 import com.study.juhee.stringboot.domain.posts.PostsRepository;
 import com.study.juhee.stringboot.web.dto.PostsSaveRequestDto;
 import com.study.juhee.stringboot.web.dto.PostsUpdateRequestDto;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.*;
+import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -28,7 +27,7 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class PostsApiControllerTest {
 
@@ -47,7 +46,7 @@ public class PostsApiControllerTest {
     private MockMvc mvc;    // 가짜 인증사용자 테스트를 위해 필요함.
 
     // 매번 테스트가 시작되기 전에 MockMvc인스턴스를 생성한다.
-    @Before
+    @BeforeEach
     public void setup() {
         mvc = MockMvcBuilders
                 .webAppContextSetup(context)
@@ -55,13 +54,12 @@ public class PostsApiControllerTest {
                 .build();
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         postsRepository.deleteAll();
     }
 
-    @Ignore
-    @Test
+    /*@Test
     @WithMockUser(roles = "USER")
     public void Posts_모든목록을조회한다() throws Exception {
         //given
@@ -77,7 +75,7 @@ public class PostsApiControllerTest {
 
         List<Posts> all = postsRepository.findAll();
         assertThat(all.size()).isEqualTo(2);
-    }
+    }*/
 
     @Test
     @WithMockUser(roles = "USER")       // 인증된 가짜 사용자를 만들어서 사용 /roles에 권한을 추가할 수 있다. > 즉, 이렇게 쓰면 ROLE_USER권한을 가진 사용자가 API를 요청하는 것과 동일함.

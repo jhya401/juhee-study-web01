@@ -1,0 +1,50 @@
+// 해당 프로젝트의 플러그인 의존성 관리 설정(인텔리제이의 플러그인 관리 아님)
+buildscript {
+    // 이 파일에서 사용할 전역변수
+    ext {
+        springBootVersion = '2.1.7.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+// 플러그인 의존성 적용여부
+// 자바, 스프링부트 사용시 필수 4가지 의존성.
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'     // 스프링부트의 의존성을 관리해주는 플러그인. 필수.
+
+/*plugins {
+    id 'java'
+}*/
+
+group 'com.study.juhee'
+version '1.0.1-SNAPSHOT'
+
+// 각 라이브러리(의존성)들을 어떤 원격저장소에서 받을지 정함.
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+
+// 주의 : 버전명시를 안해야 상단에서 명시한 버전을 따라갈 수 있음.
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.projectlombok:lombok')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework.boot:spring-boot-starter-mustache')
+    compile('org.springframework.boot:spring-boot-starter-oauth2-client')   // 소셜 기능 구현시 필요한 의존성
+    compile('org.springframework.session:spring-session-jdbc')              // DB세션사용 관련
+    compile('com.h2database:h2')    // 테스트용 인메모리 관계형 데이터베이스.
+    compile('org.mariadb.jdbc:mariadb-java-client') // RDB-MariaDB 드라이버
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.springframework.security:spring-security-test')        // security 적용 후 인증된 사용자 필요한 테스트 관련
+    //testCompile group: 'junit', name: 'junit', version: '4.12'
+}

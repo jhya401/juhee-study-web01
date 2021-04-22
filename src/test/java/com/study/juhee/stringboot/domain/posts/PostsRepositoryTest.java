@@ -1,25 +1,25 @@
 package com.study.juhee.stringboot.domain.posts;
 
-import junit.framework.TestCase;
-import org.junit.After;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-import static org.assertj.core.api.Assertions.assertThat;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@RunWith(SpringRunner.class)
+import static org.assertj.core.api.Assertions.assertThat;
+
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class PostsRepositoryTest extends TestCase {
+public class PostsRepositoryTest {
 
     @Autowired
     PostsRepository postsRepository;
 
-    @After  // Junit 테스트가 끝날때마다 실행되는 메서드.
+    @AfterEach  // Junit 테스트가 끝날때마다 실행되는 메서드.
     public void cleanup() {
         postsRepository.deleteAll();
     } // 다음 테스트 시 오류나지 않도록 지워준다.
@@ -51,6 +51,7 @@ public class PostsRepositoryTest extends TestCase {
         //given
         //LocalDateTime now = LocalDateTime.of(2019,6,4,0,0,0);
         LocalDateTime now = LocalDateTime.now();
+        System.out.println(">>>>>>>>>>>>> now=" + now);
 
         postsRepository.save(Posts.builder()
                 .title("title")
@@ -65,9 +66,9 @@ public class PostsRepositoryTest extends TestCase {
         Posts posts = postsList.get(0);
 
         System.out.println(">>>>>>>>>>>>> createData=" + posts.getCreatedDate()
-            + ", modifiedDate=" + posts.getModifiedDate());
+                + ", modifiedDate=" + posts.getModifiedDate());
 
-        assertThat(posts.getCreatedDate()).isAfter(now);
-        assertThat(posts.getModifiedDate()).isAfter(now);
+        assertThat(posts.getCreatedDate()).isAfterOrEqualTo(now);
+        assertThat(posts.getModifiedDate()).isAfterOrEqualTo(now);
     }
 }

@@ -1,6 +1,6 @@
 package com.study.juhee.stringboot.web.dto;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 //import static org.junit.Assert.assertThat; // junit의 assertThat보다 assertj를 사용한다고 함.
 
